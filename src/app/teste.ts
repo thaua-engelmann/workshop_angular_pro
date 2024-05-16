@@ -1,1 +1,0 @@
-export const msg = "Hello, World! I have just created this project and this is my first commit here."
