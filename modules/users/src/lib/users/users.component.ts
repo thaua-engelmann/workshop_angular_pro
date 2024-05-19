@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { UsersService } from './shared/users.service';
+import { Observable } from 'rxjs';
+import { User } from './types/user';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor, AsyncPipe, RouterModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.sass',
 })
-export class UsersComponent {}
+export class UsersComponent {
+
+  constructor(
+    private users_service: UsersService
+  ) {}
+  
+  users$: Observable<User[]> = this.users_service.getUsers();       
+}
